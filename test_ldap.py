@@ -27,6 +27,7 @@ class aReport:  #La classe globale
 
 	def GetParam(self,debut,fin):		
 		#On fait une regexp afin de pallier à tous les cas possibles (enfin je crois).
+		#tezst
 		exp = re.compile ( debut+"(.*?)"+fin)
 		mat = exp.search ( self.data ) 
 		if (mat):
