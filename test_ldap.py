@@ -6,6 +6,7 @@ import string
 import re
 import ldap
 
+
 class aReport:  #La classe globale
 	#Les attributs globaux de la classe.
 	host=""
