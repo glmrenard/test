@@ -121,6 +121,27 @@ class aReport:  #La classe globale
 		llmail=list(set(llmail))
 		llmail.sort()
 		print llmail
+		
+	def PrettyPrint3(self):
+		llmail=[]
+		i=1		
+		for result in self.Resultat:
+			print i,"/"
+			result=result[0]			
+			lmail=result[1]["uid"]
+			print lmail
+			for mail in lmail:
+				llmail.append(string.strip(mail))
+			"""
+			
+			titre=result[0]
+			data=result[1]
+			"""
+			print ""
+			i=i+1
+		llmail=list(set(llmail))
+		llmail.sort()
+		print llmail,len(llmail)
 
 		
 def main():
@@ -147,8 +168,11 @@ def main():
 	#R.Resultat=R.Chercher("ou=ArteSecurityGroup,dc=test,dc=ad2003",['name'],'(name=*)') #Tout le monde de l'ou artesecuritygroup
 	#R.Resultat=R.Chercher("ou=ArteSecurityGroup,dc=test,dc=ad2003",['name','arteServiceId'],'(arteServiceId=16)') #artenumber id et cn pour le groupe arteserviceid 21
 	
-	R.Resultat=R.Chercher("ou=groups,dc=arte,dc=tv",['memberUid'],'(cn=confluence*)') #les mails des gens du groupe confluence*
-	R.PrettyPrint2()
+	#R.Resultat=R.Chercher("ou=groups,dc=arte,dc=tv",['memberUid'],'(cn=confluence*)') #les mails des gens du groupe confluence*
+	#R.PrettyPrint2()
+	
+	R.Resultat=R.Chercher("ou=people,dc=arte,dc=tv",['uid'],'(uid=*)') #Tous les users du ldap
+	R.PrettyPrint3()
 	
 	
 	#R.Resultat=R.Chercher("cn=users,dc=mail,dc=strg,dc=arte",['cn'],'(objectclass=group)') #Tout le monde
