@@ -108,11 +108,10 @@ class aReport:  #La classe globale
 			print i,"/"
 			result=result[0]			
 			lmail=result[1]["memberUid"]
-			print lmail
+				
 			for mail in lmail:
 				llmail.append(string.strip(mail))
-			"""
-			
+			"""			
 			titre=result[0]
 			data=result[1]
 			"""
@@ -126,14 +125,15 @@ class aReport:  #La classe globale
 		llmail=[]
 		i=1		
 		for result in self.Resultat:
-			print i,"/"
+			#print i,"/"
 			result=result[0]			
 			lmail=result[1]["uid"]
-			print lmail
+			if not (result[1].has_key('mail')):
+				print "%s n'a pas de mail" % lmail[0]
+			#print lmail
 			for mail in lmail:
 				llmail.append(string.strip(mail))
-			"""
-			
+			"""			
 			titre=result[0]
 			data=result[1]
 			"""
@@ -141,8 +141,7 @@ class aReport:  #La classe globale
 			i=i+1
 		llmail=list(set(llmail))
 		llmail.sort()
-		print llmail,len(llmail)
-
+		#print llmail,len(llmail)
 		
 def main():
 	a=[]	
@@ -151,11 +150,9 @@ def main():
 	#R=aReport("chakra","cn=admin,dc=linux,dc=strg,dc=arte","S>Ë6ö\\")
 	#R=aReport("thor","cn=Admin Exchange,cn=Users,DC=test,DC=ad2003","P¦óÇ")
 	#R=aReport("badiane","cn=Admin Exchange,cn=Users,DC=mail,DC=strg,DC=arte","tera")
-	#R=aReport("ldap.newtech.arte.tv","cn=Manager,dc=arte,dc=tv","pan49ldapsearch") #ldapsearch -v -D "cn=Manager,dc=arte,dc=tv" -W -h ldap.newtech.arte.tv -b "ou=people,dc=arte,dc=tv " "objectclass=*"
-	R=aReport("ldap.newtech.arte.tv","cn=tvge,dc=arte,dc=tv","tvge") #ldapsearch -v -D "cn=Manager,dc=arte,dc=tv" -W -h ldap.newtech.arte.tv -b "ou=people,dc=arte,dc=tv " "objectclass=*"
+	R=aReport("ldap.newtech.arte.tv","cn=Manager,dc=arte,dc=tv","pan49ldapsearch") #ldapsearch -v -D "cn=Manager,dc=arte,dc=tv" -W -h ldap.newtech.arte.tv -b "ou=people,dc=arte,dc=tv " "objectclass=*"
 
 	R.l=R.Connect()	
-	exit (2)
 	#R.Chercher("cn=users,dc=mail,dc=strg,dc=arte",['name'],"(&(mDBUseDefaults=FALSE)(name=FAX))")
 	#R.Resultat=R.Chercher("cn=users,dc=mail,dc=strg,dc=arte",['name','mDBUseDefaults'],"(mDBUseDefaults=FALSE)")
 	#R.Resultat=R.Chercher("cn=users,dc=mail,dc=strg,dc=arte",a,"(name=#Service Multimedia)")
@@ -173,8 +170,8 @@ def main():
 	#R.Resultat=R.Chercher("ou=groups,dc=arte,dc=tv",['memberUid'],'(cn=confluence*)') #les mails des gens du groupe confluence*
 	#R.PrettyPrint2()
 	
-	R.Resultat=R.Chercher("ou=people,dc=arte,dc=tv",a,'(uid=*)') #Tous les users du ldap
-	R.PrettyPrint()
+	R.Resultat=R.Chercher("ou=people,dc=arte,dc=tv",[],'(uid=*)') #Tous les users du ldap
+	R.PrettyPrint3()
 	
 	
 	#R.Resultat=R.Chercher("cn=users,dc=mail,dc=strg,dc=arte",['cn'],'(objectclass=group)') #Tout le monde
